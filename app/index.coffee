@@ -71,6 +71,7 @@ class OctobluServiceGenerator extends yeoman.Base
     @template "schemas/_options-schema.json", "schemas/options-schema.json", context
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
+    @template "src/config-generators/_forwarder-device-config-generator.coffee", "src/config-generators/forwarder-device-config-generator.coffee", context
     @template "src/controllers/_device-controller.coffee", "src/controllers/device-controller.coffee", context
     @template "src/controllers/_message-controller.coffee", "src/controllers/message-controller.coffee", context
     @template "src/models/_model.coffee", "src/models/#{filePrefix}-model.coffee", context

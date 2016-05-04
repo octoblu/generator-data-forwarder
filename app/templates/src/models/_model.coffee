@@ -6,4 +6,4 @@ class <%= classPrefix %>
       console.warn 'I should have done something.'
       callback()
 
-module.exports = Model
+module.exports = <%= classPrefix %>
