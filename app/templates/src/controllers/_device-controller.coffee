@@ -11,12 +11,11 @@ class DeviceController
     throw new Error('imageUrl is required') unless @imageUrl?
 
   create: (req, res) =>
-    {name, options} = req.body
+    config = req.body
     {meshbluAuth}   = req
     authorizedUuid  = meshbluAuth.uuid
-    return res.sendError @_userError 422, 'options are required for this device' unless options?
 
-    deviceConfig   = generateConfig {@deviceType, @imageUrl, @serviceUrl, authorizedUuid, name, options}
+    deviceConfig   = generateConfig {@deviceType, @imageUrl, @serviceUrl, authorizedUuid, config}
     meshbluHttp    = new MeshbluHttp meshbluAuth
 
     meshbluHttp.register deviceConfig, (error, device) =>

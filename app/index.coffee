@@ -69,6 +69,7 @@ class OctobluServiceGenerator extends yeoman.Base
     console.log 'about to template stuff'
     @template "_package.json", "package.json", context
     @template "schemas/_configure-schema.json", "schemas/configure-schema.json", context
+    @template "examples/_example.sh", "examples/example.sh", context
     @template "test/_mocha.opts", "test/mocha.opts", context
     @template "test/_test_helper.coffee", "test/test_helper.coffee", context
     @template "src/config-generators/_forwarder-device-config-generator.coffee", "src/config-generators/forwarder-device-config-generator.coffee", context

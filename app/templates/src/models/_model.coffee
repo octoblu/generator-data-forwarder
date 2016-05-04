@@ -1,9 +1,10 @@
 class <%= classPrefix %>
   constructor: ->
-    console.warn 'Implement this guy to do something!'
+    console.warn 'implement <%= classPrefix %>.onMessage if you want this service to actually do something.'
 
-    onMessage ({message, config}, callback) =>
-      console.warn 'I should have done something.'
-      callback()
+  onMessage: ({message, device}, callback) =>
+    console.warn 'implement <%= classPrefix %>.onMessage if you want this service to actually do something.'
+    console.log JSON.stringify {message,device}, null, 2
+    callback()
 
 module.exports = <%= classPrefix %>
