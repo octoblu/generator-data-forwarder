@@ -1,7 +1,8 @@
-_           = require 'lodash'
-debug       = require('debug')('data-forwarder:<%= appname %>')
-MeshbluHttp = require 'meshblu-http'
-generateConfig = require '../config-generators/forwarder-device-config-generator'
+_               = require 'lodash'
+debug           = require('debug')('data-forwarder:<%= appname %>')
+MeshbluHttp     = require 'meshblu-http'
+generateConfig  = require '../config-generators/forwarder-device-config-generator'
+configureSchema = require '../../schemas/configure-schema.json'
 
 class DeviceController
   constructor: ({@serviceUrl, @deviceType, @imageUrl})->
@@ -20,6 +21,9 @@ class DeviceController
     meshbluHttp.register deviceConfig, (error, device) =>
       return res.sendError error if error?
       res.status(201).send device
+
+  getConfigureSchema: (req, res) =>
+    res.status(200).send configureSchema
 
   _userError: (code, message) =>
     error = new Error message

@@ -14,6 +14,11 @@ module.exports = ({authorizedUuid, deviceType, imageUrl, serviceUrl, name, optio
           method: 'POST'
           generateAndForwardMeshbluCredentials: true
         }]
+
+    schemas:
+      configure:
+        url: "#{serviceUrl}/schemas/configure.json"
+
     whitelists:
       broadcast:
         as:       [{uuid: authorizedUuid}]

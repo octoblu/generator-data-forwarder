@@ -10,6 +10,7 @@ class Router
 
   route: (app) =>
     meshbluAuth = MeshbluAuth @meshbluConfig
+    app.get '/schemas/configure.json', @deviceController.getConfigureSchema
     app.use meshbluAuth
     app.post '/messages', @messageController.message
     app.post '/devices',  @deviceController.create
