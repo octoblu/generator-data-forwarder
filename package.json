@@ -1,0 +1,43 @@
+{
+  "name": "generator-data-forwarder",
+  "version": "1.0.0",
+  "description": "Generate data forwarders for Meshblu",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "coffee-script": "^1.10.0",
+    "github": "^0.2.4",
+    "html-wiring": "^1.2.0",
+    "lodash": "^4.11.1",
+    "yeoman-generator": "^0.22.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coffee-coverage": "^1.0.1",
+    "coffee-script": "^1.10.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5",
+    "mocha-istanbul": "^0.2.0",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
+  },
+  "scripts": {
+    "test": "istanbul cover _mocha -- -R spec --require coffee-coverage/register-istanbul"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octoblu/generator-data-forwarder.git"
+  },
+  "keywords": [
+    "Meshblu",
+    "IoT"
+  ],
+  "author": "Octoblu <serveradmin@octoblu.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/octoblu/generator-data-forwarder/issues"
+  },
+  "homepage": "https://github.com/octoblu/generator-data-forwarder#readme"
+}
