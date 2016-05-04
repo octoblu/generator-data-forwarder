@@ -18,9 +18,14 @@ class DeviceController
 
     deviceConfig   = generateConfig {@deviceType, @imageUrl, @serviceUrl, authorizedUuid, name, options}
     meshbluHttp    = new MeshbluHttp meshbluAuth
+
     meshbluHttp.register deviceConfig, (error, device) =>
       return res.sendError error if error?
-      res.status(201).send device
+      {uuid} = device
+      subscription = {subscriberUuid: uuid, emitterUuid: uuid, type: 'message.received'}
+      meshbluHttp.createSubscription subscription, (error) =>
+        return res.sendError error if error?
+        res.status(201).send device
 
   getConfigureSchema: (req, res) =>
     res.status(200).send configureSchema
