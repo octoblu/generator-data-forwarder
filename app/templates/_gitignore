@@ -27,4 +27,4 @@ build/Release
 node_modules
 tmp
 meshblu.json
-CONFIGURATION_FOR_DEV_AND_PROD
+deployments

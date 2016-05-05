@@ -66,7 +66,6 @@ class OctobluServiceGenerator extends yeoman.Base
       instancePrefix
       constantPrefix
     }
-    console.log 'about to template stuff'
     @template "_package.json", "package.json", context
     @template "schemas/_configure-schema.json", "schemas/configure-schema.json", context
     @template "examples/_example.sh", "examples/example.sh", context
@@ -87,6 +86,11 @@ class OctobluServiceGenerator extends yeoman.Base
     @template "README.md", "README.md", context
     @template "LICENSE", "LICENSE", context
 
+
+    #deployments
+    @template "deployments/dev/deployment-files/generator/projects/_dev-deployment.json", "deployments/dev/deployment-files/generator/projects/#{@appname}.json", context
+    @template "deployments/dev/deployment-files/generator/public-env/_SERVICE_URL", "deployments/dev/deployment-files/generator/public-env/#{@appname}/SERVICE_URL", context
+    @template "deployments/dev/_install.sh", "deployments/dev/install.sh", context
 
   install: =>
     return if @skipInstall
