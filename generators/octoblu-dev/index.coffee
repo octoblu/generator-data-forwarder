@@ -1,10 +1,11 @@
 yeoman = require 'yeoman-generator'
 chalk  = require 'chalk'
 path   = require 'path'
+_      = require 'lodash'
 
 class DevelopmentGenerator extends yeoman.Base
   writing: =>
-    @appname = require(path.join( process.cwd(), 'package.json')).name
+    @appname = _.kebabCase @appname
     context = {@appname}
     @template "deployment-files/generator/projects/_dev-deployment.json", "octoblu-dev/deployment-files/generator/projects/#{@appname}.json", context
     @template "deployment-files/generator/public-env/_SERVICE_URL", "octoblu-dev/deployment-files/generator/public-env/#{@appname}/SERVICE_URL", context

@@ -26,13 +26,21 @@ class OctobluServiceGenerator extends yeoman.Base
     done = @async()
 
     prompts = [
-      name: 'githubUser'
-      message: 'Would you mind telling me your username on GitHub?'
-      default: 'octoblu'
+      {
+        name: 'githubUser'
+        message: 'Would you mind telling me your username on GitHub?'
+        default: 'octoblu'
+      }
+      {
+        type: 'confirm'
+        name: 'octobluDev'
+        message: 'Generate octoblu-dev config files?'
+        default: true
+      }
     ]
 
     @prompt prompts, (props) =>
-      @githubUser = props.githubUser
+      {@githubUser, @octobluDev, @production} = props
       done()
 
   userInfo: =>
@@ -91,9 +99,15 @@ class OctobluServiceGenerator extends yeoman.Base
     @installDependencies npm: true, bower: false
 
   end: =>
-    @log "\nCongratulations!!! You just generated #{@appname}. but wait, there's more!"
-    @log "Run #{chalk.bold.underline.green 'yo data-forwarder:octoblu-dev'} if you want to generate files to run this in octoblu-dev"
-    @log "Run #{chalk.bold.underline.blue 'yo data-forwarder:production'} if you want to generate files to run this in production"
+    @log "\nCongratulations!!! You just generated #{@appname}"
+    if @octobluDev
+      @composeWith 'data-forwarder:octoblu-dev', options: {@appname}
+    else
+      @log "But wait, there's more! Run #{chalk.bold.underline.green 'yo data-forwarder:octoblu-dev'} if you want to generate files to run this in octoblu-dev"
 
+    if @production
+      @composeWith 'data-forwarder:production', options: {@appname}
+    else
+      @log "But wait, there's more! Run #{chalk.bold.underline.blue 'yo data-forwarder:production'} if you want to generate files to run this in production"
 
 module.exports = OctobluServiceGenerator
