@@ -27,4 +27,5 @@ build/Release
 node_modules
 tmp
 meshblu.json
-deployments
+octoblu-dev
+production

@@ -1,10 +1,10 @@
 util       = require 'util'
 path       = require 'path'
 url        = require 'url'
-htmlWiring = require 'html-wiring'
 yeoman     = require 'yeoman-generator'
 _          = require 'lodash'
 helpers    = require './helpers'
+chalk      = require 'chalk'
 
 class OctobluServiceGenerator extends yeoman.Base
   constructor: (args, options, config) ->
@@ -14,7 +14,6 @@ class OctobluServiceGenerator extends yeoman.Base
     {@realname, @githubUrl} = options
     @skipInstall = options['skip-install']
     @githubUser  = options['github-user']
-    @pkg = JSON.parse htmlWiring.readFileAsString path.join __dirname, '../package.json'
 
   initializing: =>
     @appname = _.kebabCase @appname
@@ -86,18 +85,15 @@ class OctobluServiceGenerator extends yeoman.Base
     @template "README.md", "README.md", context
     @template "LICENSE", "LICENSE", context
 
-
-    #deployments
-    @template "deployments/dev/deployment-files/generator/projects/_dev-deployment.json", "deployments/dev/deployment-files/generator/projects/#{@appname}.json", context
-    @template "deployments/dev/deployment-files/generator/public-env/_SERVICE_URL", "deployments/dev/deployment-files/generator/public-env/#{@appname}/SERVICE_URL", context
-    @template "deployments/dev/_install.sh", "deployments/dev/install.sh", context
-
   install: =>
     return if @skipInstall
 
     @installDependencies npm: true, bower: false
 
   end: =>
-    return if @skipInstall
+    @log "\nCongratulations!!! You just generated #{@appname}. but wait, there's more!"
+    @log "Run #{chalk.bold.underline.green 'yo data-forwarder:octoblu-dev'} if you want to generate files to run this in octoblu-dev"
+    @log "Run #{chalk.bold.underline.blue 'yo data-forwarder:production'} if you want to generate files to run this in production"
+
 
 module.exports = OctobluServiceGenerator

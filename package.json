@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "coffee-script": "^1.10.0",
+    "debug-stream": "^3.0.1",
     "github": "^0.2.4",
     "html-wiring": "^1.2.0",
     "lodash": "^4.11.1",
