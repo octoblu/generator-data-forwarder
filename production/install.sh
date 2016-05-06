@@ -7,9 +7,9 @@ rsync -avh --progress ./deployment-files/* $PRODUCTION_ENV_DIR
 
 npm i -g deployinate-configurator
 
-dplcfg service <%= appname %> -d service-files
+dplcfg service generator-data-forwarder -d service-files
 
-STACK_SERVICES_DIR=~/Projects/Octoblu/the-stack-services/services.d/<%= appname %>
+STACK_SERVICES_DIR=~/Projects/Octoblu/the-stack-services/services.d/generator-data-forwarder
 rsync -avh --progress ./service-files/* $STACK_SERVICES_DIR
 
 echo "\n\n\n"
@@ -18,14 +18,10 @@ echo "Alright, I'm not going to do the rest for you, because I could be wrong an
 
 echo "get octoblu/tools from brew if you don't have them"
 
-echo "run 'minorsync load <%= appname %>'"
-echo "run 'majorsync load <%= appname %>'"
+echo "run 'minorsync load generator-data-forwarder'"
+echo "run 'majorsync load generator-data-forwarder'"
 
-echo "in fleetmux:"
 echo "run 'fleetctl submit $STACK_SERVICES_DIR/*.service'"
-echo "do this over and over until you don't get any more output"
 
 echo "commit the changes to the-stack-env-production"
 echo "commit the changes to the-stack-services"
-
-echo "...and do the quay stuff, and everything else you normally do."

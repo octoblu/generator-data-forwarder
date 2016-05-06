@@ -37,6 +37,12 @@ class OctobluServiceGenerator extends yeoman.Base
         message: 'Generate octoblu-dev config files?'
         default: true
       }
+      {
+        type: 'confirm'
+        name: 'production'
+        message: 'Generate production config files?'
+        default: true
+      }
     ]
 
     @prompt prompts, (props) =>

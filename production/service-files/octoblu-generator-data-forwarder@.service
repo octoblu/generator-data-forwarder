@@ -1,0 +1,47 @@
+[Unit]
+Description=octoblu-generator-data-forwarder
+Wants=octoblu-generator-data-forwarder-register@%i.service
+Wants=octoblu-generator-data-forwarder-sidekick@%i.service
+
+[Service]
+TimeoutStartSec=300
+StartLimitInterval=30
+StartLimitBurst=30
+Restart=always
+
+
+ExecStartPre=/bin/bash -c " \
+  echo 'Writing kronk' \
+  && mkdir -p /run/kronk/octoblu-generator-data-forwarder-%i \
+  && /usr/bin/etcdctl get /kronk/wrapper/run > /run/kronk/octoblu-generator-data-forwarder-%i/kronk-run \
+  && chmod +x /run/kronk/octoblu-generator-data-forwarder-%i/kronk-run \
+"
+ExecStartPre=/bin/bash -c " \
+  /run/kronk/octoblu-generator-data-forwarder-%i/kronk-run \
+    /kronk/service/start-pre octoblu-generator-data-forwarder-%i \
+      octoblu-generator-data-forwarder \
+      %i \
+      /octoblu/generator-data-forwarder/env \
+      /octoblu/generator-data-forwarder/docker_url \
+"
+ExecStart=/bin/bash -c " \
+  /run/kronk/octoblu-generator-data-forwarder-%i/kronk-run \
+    /kronk/service/start octoblu-generator-data-forwarder-%i \
+      octoblu-generator-data-forwarder \
+      %i \
+      512m \
+      /octoblu/generator-data-forwarder/docker_url \
+      /octoblu/generator-data-forwarder \
+"
+ExecStop=/bin/bash -c " \
+  /run/kronk/octoblu-generator-data-forwarder-%i/kronk-run \
+    /kronk/service/stop octoblu-generator-data-forwarder-%i \
+      octoblu-generator-data-forwarder \
+      %i \
+"
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+MachineMetadata=Services=true
