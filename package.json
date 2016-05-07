@@ -1,6 +1,6 @@
 {
   "name": "generator-data-forwarder",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Generate data forwarders for Meshblu",
   "main": "index.js",
   "directories": {
@@ -25,7 +25,7 @@
     "sinon-chai": "^2.8.0"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- -R spec --require coffee-coverage/register-istanbul"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
