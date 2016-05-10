@@ -22,6 +22,10 @@ class DeviceController
       return res.sendError error if error?
       {uuid} = device
       subscription = {subscriberUuid: uuid, emitterUuid: uuid, type: 'message.received'}
+
+      meshbluAuth.uuid = device.uuid
+      meshbluAuth.token = device.token
+
       meshbluHttp.createSubscription subscription, (error) =>
         return res.sendError error if error?
         res.status(201).send device

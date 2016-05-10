@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 MESHBLU_SERVER="meshblu.octoblu.dev"
 MESHBLU_PORT="80"
