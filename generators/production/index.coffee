@@ -10,9 +10,10 @@ class ProductionGenerator extends yeoman.Base
     @template "_install.sh", "production/install.sh", context
     @_templateCluster 'major.d', context
     @_templateCluster 'minor.d', context
+    @_templateVulcan context
 
   _templateCluster: (clusterName, context) =>
-    envDir = "deployment-files/_cluster.d/octoblu/_service-name/env"
+    envDir        = "deployment-files/_cluster.d/octoblu/_service-name/env"
     deployFileDir = "production/deployment-files/#{clusterName}/octoblu/#{@appname}/env"
 
     @template "#{envDir}/_DEBUG", "#{deployFileDir}/DEBUG", context
@@ -20,6 +21,13 @@ class ProductionGenerator extends yeoman.Base
     @template "#{envDir}/_MESHBLU_SERVER", "#{deployFileDir}/MESHBLU_SERVER", context
     @template "#{envDir}/_SERVICE_URL", "#{deployFileDir}/SERVICE_URL", context
 
+  _templateVulcan: (context) =>
+    vulcanDir     = "deployment-files/vulcan.d/_service"
+    deployFileDir = "production/deployment-files/vulcan.d/octoblu-#{@appname}"
+
+    @template "#{vulcanDir}/_backend", "#{deployFileDir}/backend", context
+    @template "#{vulcanDir}/_frontend", "#{deployFileDir}/frontend", context
+    @template "#{vulcanDir}/_middlewares/_job-logger", "#{deployFileDir}/middlewares/job-logger", context
 
   end: =>
     @log "\nAlright, you can (probably) run #{@appname} in production!"

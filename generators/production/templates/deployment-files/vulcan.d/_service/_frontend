@@ -1,0 +1,4 @@
+--id octoblu-<%= appname %>
+--backend octoblu-<%= appname %>
+--route Host("<%= appname %>.octoblu.com")
+--trustForwardHeader
