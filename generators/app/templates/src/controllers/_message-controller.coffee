@@ -10,8 +10,9 @@ class MessageController
     meshblu = new MeshbluHttp req.meshbluAuth
     @getDeviceConfig meshblu, (error, device) =>
       return res.sendError(error) if error?
+      {options} = device
       <%= instancePrefix %> = new <%= classPrefix %>
-      <%= instancePrefix %>.onMessage {message, device}, (error) =>
+      <%= instancePrefix %>.onMessage {message, options}, (error) =>
         return res.sendError error if error?
         res.sendStatus 201
 
