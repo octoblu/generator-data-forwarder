@@ -15,37 +15,52 @@ class DeviceController
     {meshbluAuth}   = req
     authorizedUuid  = meshbluAuth.uuid
 
-    deviceConfig   = generateConfig {@deviceType, @imageUrl, @serviceUrl, authorizedUuid, config}
-    meshbluHttp    = new MeshbluHttp meshbluAuth
+    deviceConfig    = generateConfig {@deviceType, @imageUrl, @serviceUrl, authorizedUuid, config}
+    meshbluHttp     = new MeshbluHttp meshbluAuth
 
     meshbluHttp.register deviceConfig, (error, device) =>
       return res.sendError error if error?
       {uuid} = device
       subscription = {subscriberUuid: uuid, emitterUuid: uuid, type: 'message.received'}
 
+      meshbluAuth.uuid  = device.uuid
+      meshbluAuth.token = device.token
+      meshbluHttp       = new MeshbluHttp meshbluAuth
+
       meshbluHttp.createSubscription subscription, (error) =>
         return res.sendError error if error?
         res.status(201).send device
 
   delete: (req, res) =>
-    {meshbluAuth}   = req
-    {uuid}          = req.params
+    {meshbluAuth}  = req
+    {uuid}         = req.params
+    meshbluHttp    = new MeshbluHttp meshbluAuth
 
-    meshblu.unregister {uuid}, (error) =>
+    meshbluHttp.unregister {uuid}, (error) =>
       return res.sendError if error?
       return res.sendStatus 200
 
-  update: (req, res) =>
-    {meshbluAuth} = req
-    {uuid}        = req.params
-    device        = req.body
+  get: (req, res) =>
+    {meshbluAuth}  = req
+    {uuid}         = req.params
+    meshbluHttp    = new MeshbluHttp meshbluAuth
 
-    meshblu.update uuid, device, (error) =>
+    meshbluHttp.unregister {uuid}, (error) =>
       return res.sendError if error?
       return res.sendStatus 200
 
   getConfigureSchema: (req, res) =>
     res.status(200).send configureSchema
+
+  update: (req, res) =>
+    {meshbluAuth}  = req
+    {uuid}         = req.params
+    device         = req.body
+    meshbluHttp    = new MeshbluHttp meshbluAuth
+
+    meshbluHttp.update uuid, device, (error) =>
+      return res.sendError if error?
+      return res.sendStatus 200
 
   _userError: (code, message) =>
     error = new Error message

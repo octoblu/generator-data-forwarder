@@ -2,8 +2,16 @@
   "title": "Configure",
   "type": "object",
   "properties": {
-    "greeting": {
+    "name": {
       "type": "string"
+    },
+    "object": {
+      "type": "object",
+      "properties": {
+        "greeting": {
+          "type": "string"
+        }
+      }
     }
   }
 }
