@@ -23,12 +23,26 @@ class DeviceController
       {uuid} = device
       subscription = {subscriberUuid: uuid, emitterUuid: uuid, type: 'message.received'}
 
-      meshbluAuth.uuid = device.uuid
-      meshbluAuth.token = device.token
-
       meshbluHttp.createSubscription subscription, (error) =>
         return res.sendError error if error?
         res.status(201).send device
+
+  delete: (req, res) =>
+    {meshbluAuth}   = req
+    {uuid}          = req.params
+
+    meshblu.unregister {uuid}, (error) =>
+      return res.sendError if error?
+      return res.sendStatus 200
+
+  update: (req, res) =>
+    {meshbluAuth} = req
+    {uuid}        = req.params
+    device        = req.body
+
+    meshblu.update uuid, device, (error) =>
+      return res.sendError if error?
+      return res.sendStatus 200
 
   getConfigureSchema: (req, res) =>
     res.status(200).send configureSchema
