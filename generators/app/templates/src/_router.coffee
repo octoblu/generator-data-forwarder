@@ -14,10 +14,6 @@ class Router
     app.use meshbluAuth
 
     app.post   '/messages',       @messageController.message
-    
     app.post   '/devices',        @deviceController.create
-    app.get    '/devices/:uuid',  @deviceController.get
-    app.put    '/devices/:uuid',  @deviceController.update
-    app.delete '/devices/:uuid',  @deviceController.delete
 
 module.exports = Router

@@ -31,36 +31,8 @@ class DeviceController
         return res.sendError error if error?
         res.status(201).send device
 
-  delete: (req, res) =>
-    {meshbluAuth}  = req
-    {uuid}         = req.params
-    meshbluHttp    = new MeshbluHttp meshbluAuth
-
-    meshbluHttp.unregister {uuid}, (error) =>
-      return res.sendError if error?
-      return res.sendStatus 200
-
-  get: (req, res) =>
-    {meshbluAuth}  = req
-    {uuid}         = req.params
-    meshbluHttp    = new MeshbluHttp meshbluAuth
-
-    meshbluHttp.unregister {uuid}, (error) =>
-      return res.sendError if error?
-      return res.sendStatus 200
-
   getConfigureSchema: (req, res) =>
     res.status(200).send configureSchema
-
-  update: (req, res) =>
-    {meshbluAuth}  = req
-    {uuid}         = req.params
-    device         = req.body
-    meshbluHttp    = new MeshbluHttp meshbluAuth
-
-    meshbluHttp.update uuid, device, (error) =>
-      return res.sendError if error?
-      return res.sendStatus 200
 
   _userError: (code, message) =>
     error = new Error message
