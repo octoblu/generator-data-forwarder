@@ -26,9 +26,11 @@ module.exports = ({authorizedUuid, deviceType, imageUrl, serviceUrl, name, confi
             generateAndForwardMeshbluCredentials: true
           }]
 
-      schemas:
-        configure:
-          url: "#{serviceUrl}/schemas/v1/configure.json"
+    schemas:
+      version: '1.0.0'
+      configure:
+        default:
+          $ref: "#{serviceUrl}/schemas/v1/configure.json"
 
       whitelists:
         broadcast:
