@@ -20,7 +20,7 @@ echo "get octoblu/tools from brew if you don't have them"
 
 echo "run 'minorsync load <%= appname %>'"
 echo "run 'majorsync load <%= appname %>'"
-echo "run 'vulcansync load <%= appname %>'"
+echo "run 'vulcansync load octoblu-<%= appname %>'"
 echo "run quayify <%= appname %>"
 echo "Add a route to <%= appname %>.octoblu.com in Route 53"
 echo "in fleetmux:"
