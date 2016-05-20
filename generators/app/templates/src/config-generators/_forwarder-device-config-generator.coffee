@@ -5,6 +5,7 @@ module.exports = ({authorizedUuid, deviceType, imageUrl, serviceUrl, name, confi
     type: deviceType
     logo: imageUrl
     online: true
+    owner: authorizedUuid
     serviceUrl: serviceUrl
     forwarder:
       version: '1.0.0'

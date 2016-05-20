@@ -1,6 +1,6 @@
 {
   "name": "generator-data-forwarder",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Generate data forwarders for Meshblu",
   "main": "index.js",
   "directories": {
